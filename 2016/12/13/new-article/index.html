@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,7 +94,7 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
 <meta property="og:description" content="runtime怎么添加属性、方法等ivar表示成员变量class_addIvarclass_addMethodclass_addPropertyclass_addProtocolclass_replaceProperty
 
 runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略表明该属性定义了一种“非拥有关系” (nonowning relationship)。为这种属">
-<meta property="og:updated_time" content="2016-12-13T07:20:27.000Z">
+<meta property="og:updated_time" content="2016-12-13T09:01:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于runtime">
 <meta name="twitter:description" content="runtime怎么添加属性、方法等ivar表示成员变量class_addIvarclass_addMethodclass_addPropertyclass_addProtocolclass_replaceProperty
@@ -107,7 +107,7 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/dachuizi/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -196,6 +196,26 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/dachuizi/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/dachuizi/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/dachuizi/archives" rel="section">
             
@@ -212,6 +232,16 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/dachuizi/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
           </a>
         </li>
       
@@ -343,7 +373,7 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
 </ul>
 <p>3、NSObject 调 -dealloc </p>
 <ul>
-<li>只做一件事：调用 Objective-C runtime 中object_dispose() 方法</li>
+<li>只做一件事：调用 Objective-C runtime 中object_dispose() 方法<br>/img/dog.jpg</li>
 </ul>
 <ol>
 <li>调用 object_dispose()</li>
@@ -356,7 +386,10 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
 <li>调用 free()</li>
 </ul>
 <ol>
-<li>_objc_msgForward函数是做什么的？直接调用它将会发生什么？<br>_objc_msgForward是IMP类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发<br>直接调用_objc_msgForward是非常危险的事，这是把双刃刀，如果用不好会直接导致程序Crash，但是如果用得好，能做很多非常酷的事<br>JSPatch就是直接调用_objc_msgForward来实现其核心功能的<br>例子：<br><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md6" target="_blank" rel="external">https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88/%E3%80%8A%E6%8B%9B%E8%81%98%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E3%80%8B%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8B%EF%BC%89.md6</a>. 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？第一题</li>
+<li>_objc_msgForward函数是做什么的？直接调用它将会发生什么？<br>_objc_msgForward是IMP类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发<br>直接调用_objc_msgForward是非常危险的事，这是把双刃刀，如果用不好会直接导致程序Crash，但是如果用得好，能做很多非常酷的事<br>JSPatch就是直接调用_objc_msgForward来实现其核心功能的<br>例子：</li>
+</ol>
+<p>   能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？第一题</p>
+<ol>
 <li><p>能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？<br>不能向编译后得到的类中增加实例变量；<br>能向运行时创建的类中添加实例变量；<br>分析如下：<br>因为编译后的类已经注册在runtime中，类结构体中的objc_ivar_list 实例变量的链表和instance_size实例变量的内存大小已经确定，同时runtime 会调用class_setIvarLayout 或 class_setWeakIvarLayout来处理strong weak引用，所以不能向存在的类中添加实例变量<br>运行时创建的类是可以添加实例变量，调用 class_addIvar函数，但是得在调用objc_allocateClassPair之后，objc_registerClassPair之前，原因同上。</p>
 </li>
 <li><p>简述下Objective-C中调用方法的过程（runtime）<br>Objective-C是动态语言，每个方法在运行时会被动态转为消息发送，即：objc_msgSend(receiver, selector)，整个过程介绍如下：<br>objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类<br>然后在该类中的方法列表以及其父类方法列表中寻找方法运行<br>如果，在最顶层的父类（一般也就NSObject）中依然找不到相应的方法时，程序在运行时会挂掉并抛出异常unrecognized selector sent to XXX<br>但是在这之前，objc的运行时会给出三次拯救程序崩溃的机会，这三次拯救程序奔溃的说明见问题《什么时候会报unrecognized selector的异常》中的说明<br>补充说明：Runtime 铸就了Objective-C 是动态语言的特性，使得C语言具备了面向对象的特性，在程序运行期创建，检查，修改类、对象及其对应的方法，这些操作都可以使用runtime中的对应方法实现。</p>
@@ -399,6 +432,10 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/dachuizi/2016/12/13/HEXO/" rel="prev" title="HEXO">
+                HEXO <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +494,7 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/dachuizi/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -515,7 +552,7 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Pisces
   </a>
 </div>
 
@@ -581,6 +618,13 @@ runtime 如何实现 weak 属性首先要搞清楚weak属性的特点weak策略�
 
   
   
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/dachuizi/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
 
   
   <script type="text/javascript" src="/dachuizi/js/src/scrollspy.js?v=5.1.0"></script>
