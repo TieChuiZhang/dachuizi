@@ -191,52 +191,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/dachuizi/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/dachuizi/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/dachuizi/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/dachuizi/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/dachuizi/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            Sitemap
           </a>
         </li>
       
@@ -346,60 +306,7 @@
 
       
         
-          <p>经过各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的，我的 hexo 是 3.1.1 版本，hexo 不同的版本，很多配置都不一样。好吧，废话不多说了，开始吧。</p>
-<p>　　本篇文章累计了大量评论，和我的一些解答，读者有什么问题可以先看看评论，或者搜下关键字，如果还是有问题可以给我在评论里给我留言，问题很着急的可以加我 ＱＱ：1499065178　，或者给我发邮件：leopardpan@icloud.com ，都可以，如果你已经搭建完成了，可以看看我的另一篇博客HEXO进阶，有讲如何能百度搜索你的博客、多台电脑使用HEXO发布博客等。我现在的博客是使用 Jekyll 搭建的，如果你想使用我现在的模板请看Jekyll搭建个人博客</p>
-<p>正文：</p>
-<p>　这边教程是针对与Mac的，参考链接，由于原文讲到的hexo是以前的老版本，所以现在的版本配置的时候会有些改动。</p>
-<p>　之前是想着写博客，一方面是给自己做笔记，可以提升自己的写作、总结能力，一个技术点我们会使用，并不难，但是要做到让让别人也能听懂我们讲得，还是需要一定的技巧和经验的。很多类似于CSDN、博客园也都可以写文章，但是页面的样式我，不是太喜欢，简书还算好点得。最近看到一些大神们的博客（在我的友情链接里有），貌似都是用hexo写得，我也依葫芦画瓢的搭建了一个。不罗嗦了，直接上搭建步骤。</p>
-<p>配置环境</p>
-<p>安装Node（必须）</p>
-<p>作用：用来生成静态页面的 到Node.js官网下载相应平台的最新版本，一路安装即可。</p>
-<p>安装Git（必须）</p>
-<p>作用：把本地的hexo内容提交到github上去. 安装Xcode就自带有Git，我就不多说了。</p>
-<p>申请GitHub（必须）</p>
-<p>作用：是用来做博客的远程创库、域名、服务器之类的，怎么与本地hexo建立连接等下讲。 github账号我也不再啰嗦了,没有的话直接申请就行了，跟一般的注册账号差不多，SSH Keys，看你自己了，可以不配制，不配置的话以后每次对自己的博客有改动提交的时候就要手动输入账号密码，配置了就不需要了，怎么配置我就不多说了，网上有很多教程。</p>
-<p>正式安装HEXO　</p>
-<p>Node和Git都安装好后，可执行如下命令安装hexo：</p>
-<p>$ sudo npm install -g hexo<br>初始化</p>
-<p>创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：</p>
-<p>hexo init<br>好啦，至此，全部安装工作已经完成！</p>
-<p>生成静态页面</p>
-<p>继续再Blog目录下执行如下命令，生成静态页面</p>
-<p>hexo generate （hexo g  也可以）<br>本地启动</p>
-<p>启动本地服务，进行文章预览调试，命令：</p>
-<p>hexo server<br>浏览器输入<a href="http://localhost:4000">http://localhost:4000</a> 我不知道你们能不能，反正我不能，因为我还有环境没配置好</p>
-<p>常见的HEXO配置错误：</p>
-<p>ERROR Plugin load failed: hexo-server</p>
-<p>原因： Besides, utilities are separated into a standalone module. hexo.util is not reachable anymore.</p>
-<p>解决方法，执行命令：$ sudo npm install hexo-server</p>
-<p>执行命令hexo server，提示：Usage: hexo<Command> ….</p>
-<p>原因：我认为是没有生成本地服务</p>
-<p>解决方法，执行命令：$ npm install hexo-server –save</p>
-<p>提示：hexo-server@0.1.2 node_modules/hexo-server<br>…. </p>
-<p>表示成功了<a href="https://hexo.io/zh-cn/docs/server.html">参考</a></p>
-<p>这个时候再执行：$ hexo-server</p>
-<p>得到: INFO Hexo is running at <a href="http://0.0.0.0:4000/">http://0.0.0.0:4000/</a>. Press Ctrl+C to stop.</p>
-<p>这个时候再点击<a href="http://0.0.0.0:4000，正常情况下应该是最原始的画面，但是我看到的是：">http://0.0.0.0:4000，正常情况下应该是最原始的画面，但是我看到的是：</a> 白板和Cannot GET / 几个字 原因： 由于2.6以后就更新了，我们需要手动配置些东西，我们需要输入下面三行命令：</p>
-<p>npm install hexo-renderer-ejs –save<br>npm install hexo-renderer-stylus –save<br>npm install hexo-renderer-marked –save<br>这个时候再重新生成静态文件，命令：</p>
-<p>hexo generate （或hexo g）<br>启动本地服务器：</p>
-<p>hexo server （或hexo s）<br>再点击网址<a href="http://0.0.0.0:4000">http://0.0.0.0:4000</a> OK终于可以看到属于你自己的blog啦，?，虽然很简陋，但好歹有了一个属于自己的小窝了。参考链接，本地已经简单的设置好了，但是现在域名和服务器都是基于自己的电脑，接下来需要跟github进行关联。</p>
-<p>配置Github</p>
-<p>建立Repository</p>
-<p>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法 然后建立关联，我的Blog在本地/Users/leopard/Blog，Blog是我之前建的东西也全在这里面，有：</p>
-<p>Blog<br>　｜<br>　｜－－ _config.yml<br>　｜－－ node_modules<br>　｜－－ public<br>　｜－－ source<br>　｜－－ db.json<br>　｜－－ package.json<br>　｜－－ scaffolds<br>　｜－－ themes 　　　　　 　　　<br>现在我们需要_config.yml文件，来建立关联，命令：</p>
-<p>vim _config.yml<br>翻到最下面，改成我这样子的，注意： : 后面要有空格</p>
-<p>deploy:<br>type: git<br>repository: <a href="https://github.com/leopardpan/leopardpan.github.io.git">https://github.com/leopardpan/leopardpan.github.io.git</a><br>branch: master<br>执行如下命令才能使用git部署</p>
-<p>npm install hexo-deployer-git –save<br>网上会有很多说法，有的type是github, 还有repository 最后面的后缀也不一样，是github.com.git，我也踩了很多坑，我现在的版本是hexo: 3.1.1，执行命令hexo -vsersion就出来了,貌似3.0后全部改成我上面这种格式了。 忘了说了，我没用SSH Keys如果你用了SSH Keys的话直接在github里复制SSH的就行了，总共就两种协议，相信你懂的。 然后，执行配置命令：</p>
-<p>hexo deploy<br>　然后再浏览器中输入<a href="http://leopardpan.github.io/就行了，我的">http://leopardpan.github.io/就行了，我的</a> github 的账户叫 leopardpan ,把这个改成你 github 的账户名就行了</p>
-<p>部署步骤</p>
-<p>每次部署的步骤，可按以下三步来进行。</p>
-<p>hexo clean<br>hexo generate<br>hexo deploy<br>一些常用命令：</p>
-<p>hexo new “postName” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo generate #生成静态页面至public目录<br>hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy #将.deploy目录部署到GitHub<br>hexo help  #查看帮助<br>hexo version  #查看Hexo的版本<br>这里有大量的主题列表使用方法里面 都有详细的介绍，我就不多说了。<br>我这里有几款个人认为不错的主题，免去你们，一个一个的选了，欢迎吐槽我的审美，?<br>　Cover - A chic theme with facebook-like cover photo<br>　Oishi - A white theme based on Landscape plus and Writing.<br>　Sidebar - Another theme based on Light with a simple sidebar<br>　TKL - A responsive design theme for Hexo. 一个设计优雅的响应式主题<br>　Tinnypp - A clean, simple theme based on Tinny<br>　Writing - A small and simple hexo theme based on Light<br>　Yilia - Responsive and simple style 优雅简洁响应式主题，我用得就是这个。<br>　Pacman voidy - A theme with dynamic tagcloud and dynamic snow</p>
-<p>一些基本路径</p>
-<p>　文章在 source/_posts，编辑器可以用 Sublime，支持 markdown 语法。如果想修改头像可以直接在主题的 _config.yml 文件里面修改，友情链接，之类的都在这里，修改名字在 public/index.html 里修改，开始打理你的博客吧，有什么问题或者建议，都可以提出来，我会继续完善的。</p>
-<p>Markdown语法参考链接: 作业部落</p>
-<p>Q&amp;A</p>
-<p>问：如何让文章想只显示一部分和一个 阅读全文 的按钮？<br>答：在文章中加一个
+          <p>经过各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的，我的 hexo 是  版本，hexo 不同的版本，很多配置都不一样。好吧，废话不多说了，开始吧。<br>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/dachuizi/2016/12/13/HEXO/#more" rel="contents">
@@ -520,59 +427,14 @@
 
       
         
-          
-            <p>runtime怎么添加属性、方法等<br>ivar表示成员变量<br>class_addIvar<br>class_addMethod<br>class_addProperty<br>class_addProtocol<br>class_replaceProperty</p>
-<ol>
-<li>runtime 如何实现 weak 属性<br>首先要搞清楚weak属性的特点<br>weak策略表明该属性定义了一种“非拥有关系” (nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似;然而在属性所指的对象遭到摧毁时，属性值也会清空(nil out)</li>
-</ol>
-<p>那么runtime如何实现weak变量的自动置nil？</p>
-<p>runtime对注册的类，会进行布局，会将 weak 对象放入一个 hash 表中。用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会调用对象的 dealloc 方法，假设 weak 指向的对象内存地址是a，那么就会以a为key，在这个 weak hash表中搜索，找到所有以a为key的 weak 对象，从而设置为 nil。</p>
-<p>weak属性需要在dealloc中置nil么<br>在ARC环境无论是强指针还是弱指针都无需在 dealloc 设置为 nil ， ARC 会自动帮我们处理<br>即便是编译器不帮我们做这些，weak也不需要在dealloc中置nil<br>在属性所指的对象遭到摧毁时，属性值也会清空</p>
-<p>objc// 模拟下weak的setter方法，大致如下- (void)setObject:(NSObject *)object{ objc_setAssociatedObject(self, “object”, object, OBJC_ASSOCIATION_ASSIGN); [object cyl_runAtDealloc:^{ _object = nil; }];}</p>
-<ol>
-<li>runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）<br>每一个类对象中都一个对象方法列表（对象方法缓存）<br>类方法列表是存放在类对象中isa指针指向的元类对象中（类方法缓存）<br>方法列表中每个方法结构体中记录着方法的名称,方法实现,以及参数类型，其实selector本质就是方法名称,通过这个方法名称就可以在方法列表中找到对应的方法实现.<br>当我们发送一个消息给一个NSObject对象时，这条消息会在对象的类对象方法列表里查找<br>当我们发送一个消息给一个类时，这条消息会在类的Meta Class对象的方法列表里查找</li>
-<li>使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？<br>无论在MRC下还是ARC下均不需要被关联的对象在生命周期内要比对象本身释放的晚很多，它们会在被 NSObject -dealloc 调用的object_dispose()方法中释放<br>补充：对象的内存销毁时间表，分四个步骤</li>
-</ol>
-<p>1、调用 -release ：引用计数变为零</p>
-<ul>
-<li>对象正在被销毁，生命周期即将结束. </li>
-<li>不能再有新的 __weak 弱引用，否则将指向 nil.</li>
-<li>调用 [self dealloc]</li>
-</ul>
-<p>2、 父类调用 -dealloc </p>
-<ul>
-<li>继承关系中最直接继承的父类再调用 -dealloc </li>
-<li>如果是 MRC 代码 则会手动释放实例变量们（iVars）</li>
-<li>继承关系中每一层的父类 都再调用 -dealloc</li>
-</ul>
-<p>3、NSObject 调 -dealloc </p>
-<ul>
-<li>只做一件事：调用 Objective-C runtime 中object_dispose() 方法<br>/img/dog.jpg</li>
-</ul>
-<ol>
-<li>调用 object_dispose()</li>
-</ol>
-<ul>
-<li>为 C++ 的实例变量们（iVars）调用 destructors</li>
-<li>为 ARC 状态下的 实例变量们（iVars） 调用 -release </li>
-<li>解除所有使用 runtime Associate方法关联的对象 </li>
-<li>解除所有 __weak 引用 </li>
-<li>调用 free()</li>
-</ul>
-<ol>
-<li>_objc_msgForward函数是做什么的？直接调用它将会发生什么？<br>_objc_msgForward是IMP类型，用于消息转发的：当向一个对象发送一条消息，但它并没有实现的时候，_objc_msgForward会尝试做消息转发<br>直接调用_objc_msgForward是非常危险的事，这是把双刃刀，如果用不好会直接导致程序Crash，但是如果用得好，能做很多非常酷的事<br>JSPatch就是直接调用_objc_msgForward来实现其核心功能的<br>例子：</li>
-</ol>
-<p>   能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？第一题</p>
-<ol>
-<li><p>能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？<br>不能向编译后得到的类中增加实例变量；<br>能向运行时创建的类中添加实例变量；<br>分析如下：<br>因为编译后的类已经注册在runtime中，类结构体中的objc_ivar_list 实例变量的链表和instance_size实例变量的内存大小已经确定，同时runtime 会调用class_setIvarLayout 或 class_setWeakIvarLayout来处理strong weak引用，所以不能向存在的类中添加实例变量<br>运行时创建的类是可以添加实例变量，调用 class_addIvar函数，但是得在调用objc_allocateClassPair之后，objc_registerClassPair之前，原因同上。</p>
-</li>
-<li><p>简述下Objective-C中调用方法的过程（runtime）<br>Objective-C是动态语言，每个方法在运行时会被动态转为消息发送，即：objc_msgSend(receiver, selector)，整个过程介绍如下：<br>objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类<br>然后在该类中的方法列表以及其父类方法列表中寻找方法运行<br>如果，在最顶层的父类（一般也就NSObject）中依然找不到相应的方法时，程序在运行时会挂掉并抛出异常unrecognized selector sent to XXX<br>但是在这之前，objc的运行时会给出三次拯救程序崩溃的机会，这三次拯救程序奔溃的说明见问题《什么时候会报unrecognized selector的异常》中的说明<br>补充说明：Runtime 铸就了Objective-C 是动态语言的特性，使得C语言具备了面向对象的特性，在程序运行期创建，检查，修改类、对象及其对应的方法，这些操作都可以使用runtime中的对应方法实现。</p>
-</li>
-<li><p>什么是method swizzling（俗称黑魔法）<br>简单说就是进行方法交换<br>在Objective-C中调用一个方法，其实是向一个对象发送消息，查找消息的唯一依据是selector的名字。利用Objective-C的动态特性，可以实现在运行时偷换selector对应的方法实现，达到给方法挂钩的目的<br>每个类都有一个方法列表，存放着方法的名字和方法实现的映射关系，selector的本质其实就是方法名，IMP有点类似函数指针，指向具体的Method实现，通过selector就可以找到对应的IMP<br>交换方法的几种实现方式<br>利用 method_exchangeImplementations 交换两个方法的实现<br>利用 class_replaceMethod 替换方法的实现<br>利用 method_setImplementation 来直接设置某个方法的IMP</p>
-</li>
-</ol>
-
-          
+          <p>runtime怎么添加属性、方法等<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/dachuizi/2016/12/13/new-article/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -686,18 +548,14 @@
 
       
         
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
+          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/dachuizi/2016/12/13/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -765,7 +623,7 @@
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
-            <a href="/dachuizi/archives">
+            <a href="/dachuizi/">
               <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
@@ -773,6 +631,13 @@
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/dachuizi/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
