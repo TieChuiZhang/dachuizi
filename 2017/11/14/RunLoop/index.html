@@ -1,0 +1,878 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/dachuizi/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/dachuizi/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/dachuizi/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="“Lee,MiNi”" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/dachuizi/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Runloop基础知识
+1.1 字面意思
+
+a 运行循环 
+b 跑圈
+
+1.2基本作用
+
+a 保持APP持续运行
+b 处理APP内各种事件(触摸事件,定时器事件[NStimer],selector[选择器·performSelector···]事件等等)
+c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的时候休息    
+
+1.3 重要说明
+
+1) 如果没有Runloop,那么程序已">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunLoop">
+<meta property="og:url" content="https://tiechuizhang.github.io/2017/11/14/RunLoop/index.html">
+<meta property="og:site_name" content="Lee">
+<meta property="og:description" content="Runloop基础知识
+1.1 字面意思
+
+a 运行循环 
+b 跑圈
+
+1.2基本作用
+
+a 保持APP持续运行
+b 处理APP内各种事件(触摸事件,定时器事件[NStimer],selector[选择器·performSelector···]事件等等)
+c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的时候休息    
+
+1.3 重要说明
+
+1) 如果没有Runloop,那么程序已">
+<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png">
+<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/12941390.png">
+<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/5395047.png">
+<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png">
+<meta property="og:updated_time" content="2017-11-14T14:24:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunLoop">
+<meta name="twitter:description" content="Runloop基础知识
+1.1 字面意思
+
+a 运行循环 
+b 跑圈
+
+1.2基本作用
+
+a 保持APP持续运行
+b 处理APP内各种事件(触摸事件,定时器事件[NStimer],selector[选择器·performSelector···]事件等等)
+c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的时候休息    
+
+1.3 重要说明
+
+1) 如果没有Runloop,那么程序已">
+<meta name="twitter:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/dachuizi/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiechuizhang.github.io/2017/11/14/RunLoop/"/>
+
+
+
+
+
+  <title> RunLoop | Lee </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/dachuizi/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lee</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/dachuizi/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/dachuizi/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://tiechuizhang.github.io/dachuizi/2017/11/14/RunLoop/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Lee">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/dachuizi/uploads/IMG_0375.JPG">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lee">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Lee" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RunLoop
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T20:23:31+08:00">
+                2017-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="Runloop基础知识"><a href="#Runloop基础知识" class="headerlink" title="Runloop基础知识"></a>Runloop基础知识</h5><blockquote>
+<p>1.1 字面意思<br></p>
+</blockquote>
+<pre><code>a 运行循环 
+b 跑圈
+</code></pre><blockquote>
+<p>1.2基本作用</p>
+</blockquote>
+<pre><code>a 保持APP持续运行
+b 处理APP内各种事件(触摸事件,定时器事件[NStimer],selector[选择器·performSelector···]事件等等)
+c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的时候休息    
+</code></pre><blockquote>
+<p>1.3 重要说明</p>
+</blockquote>
+<pre><code>1) 如果没有Runloop,那么程序已启动就会退出,什么事情都做不了.
+2) 如果有了Runloop,那么相当于内部有有个死循环,保证程序能够持续的运行
+3) main函数中的Runloop
+    a.在UIApplication函数内部就启动了一个Runloop,该函            数但会一个int类型的值
+    b.这个默认启动的Runloop是跟主线程相关联的
+</code></pre><blockquote>
+<p>1.4 Runloop 对象</p>
+</blockquote>
+<pre><code>1) 在iOS开发中有两套API来访问Runloop
+    a foundation框架[NSRunloop]
+    b core foundation框架[CFRunloopRef]
+2) NSRunloop和CFRunloopRef都代表Runloop对象,他们是等价的,可以互相转换
+3) NSRunloop是基于CFRunloopRef的一层OC包装,所有要了解Runloop的内部结构,需要多研究CFRunloopRef层面的API (core Foundation)
+</code></pre><blockquote>
+<p>1.5 Runloop参考资料</p>
+</blockquote>
+<p>1）苹果官方文档<br>        <a href="mailto:address@example.com" target="_blank" rel="external">https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html</a><br>2）CFRunLoopRef开源代码下载地址：<a>href=”mailto:address@example.com”&gt;<a href="http://opensource.apple.com/source/CF/CF-1151.16/" target="_blank" rel="external">http://opensource.apple.com/source/CF/CF-1151.16/</a></a></p>
+<blockquote>
+<p>1.6 Runloop与线程</p>
+</blockquote>
+<pre><code> 1).Runloop与线程的关系:一个Runloop对应着一条唯一的线程
+     问:如何让子线程不死
+     答:给这条子线程开启一个Runloop
+ 2) Runloop的创建,主线程的Runloop已经创建好了,子线程的Runloop需要手动创建    
+3) Runloop生命周期在第一次获取时创建在线程结束时销毁
+</code></pre><blockquote>
+<p>1.7 获得Runloop对象</p>
+</blockquote>
+<pre><code>1) 获得当前Runloop对象
+
+    NSRunloop *currentRunloop = [NSRunloop currentRunloop];
+
+    CFRunloopRef cfCurrentRunloop    = CFRunloopGetCurrent();
+
+2) 拿到当前应用程序的主Runloop(主线程对应的runloop)
+
+            NSRunloop *mainRunloop = [NSRunloop mainRunloop];
+
+    CFRunloopRef cfMainRunloop    = CFRunloopGetMain();
+
+3) 注意:开启一个子线程创建Runloop不是通过 alloc init方法创建的,而是通过currentRunloop来创建,currentRunloop本身是一个懒加载
+4) 在子线程中,如果不主动获取Runloop的话,那么子线程内部是不会创建Runloop的(可以下载CFRunloopRef的源码，搜索_CFRunloopGet0,查看代码)          
+5) Runloop对象是利用字典进行存储key对应的是线程
+value对应该线程的Runloop 
+</code></pre><blockquote>
+<p>1.8 Runloop相关类</p>
+</blockquote>
+<p>(1) Runloop运行原理图<br><img src="/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png" alt=""></p>
+<p>(2) 五个相关的类</p>
+<pre><code>a.CFRunloopRef
+b.CFRunloopModeRef[Runloop的运行模式]
+c.CFRunloopSourceRef[Runloop要处理的事件源]
+d.CFRunloopTimerRef[Timer事件]
+e.CFRunloopObserverRef[Runloop的观察者]
+</code></pre><p>(3)    Runloop和相关类之间的关系图<br><img src="/Users/Lee/Desktop/12941390.png" alt="">    </p>
+<p>(4)Runloop想要跑起来必须要有一个mode,这个mode必须有source/timer/observer 只要要有其中的一个</p>
+<pre><code>1.CFRunloopModeRef代表着Runloop的运行模式
+2.一个Runloop中可以有多个mode,一个mode中又可以有多个source/timer/observer
+3.每次Runloop启动的时候,就只能指定一个mode,这个mode被称为该Runloop的当前Runloop
+4.如果要切换mode只能先退出当前Runloop,再重新制定一个mode在进入
+5.这样做主要是为了分割不同组的定时器等,让他们互相之间不受影响
+6.系统默认注册了5个mode
+    a.kCFRunLoopDefaultMode:APP的默认mode通常主线程是在这个mode下运行
+    b.kCFRunLoopDefaultMode:界面跟踪mode,用于ScrollView追踪触摸滑动,保证界面滑动时不受其他mode影响 
+    c.UIInitializationRunLoopMode:在刚启动APP时进入的第一个mode,启动完成后就不再使用
+    d.GSEventReceiveRunLoopMode:接收系统时间的内部mode 通常用不到
+    e.kCFRunLoopCommonModes:这是一个占位mode,不是一种真正的mode
+</code></pre><p> CFRunloopTimerRef<br> （1）NSTimer相关代码</p>
+<pre><code>/*
+    说明：
+    （1）runloop一启动就会选中一种模式，当选中了一种模式之后其它的模式就都不鸟。一个mode里面可以添加多个NSTimer,也就是说以后当创建NSTimer的时候，可以指定它是在什么模式下运行的。
+    （2）它是基于时间的触发器，说直白点那就是时间到了我就触发一个事件，触发一个操作。基本上说的就是NSTimer
+    （3）相关代码
+*/
+- (void)timer2
+{
+    //NSTimer 调用了scheduledTimer方法，那么会自动添加到当前的runloop里面去，而且runloop的运行模式kCFRunLoopDefaultMode
+
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+
+    //更改模式
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+
+}
+
+- (void)timer1
+{
+    //    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+
+    NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+
+    //定时器添加到UITrackingRunLoopMode模式，一旦runloop切换模式，那么定时器就不工作
+    //    [[NSRunLoop currentRunLoop] addTimer:timer forMode:UITrackingRunLoopMode];
+
+    //定时器添加到NSDefaultRunLoopMode模式，一旦runloop切换模式，那么定时器就不工作
+    //    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+
+    //占位模式：common modes标记
+    //被标记为common modes的模式 kCFRunLoopDefaultMode  UITrackingRunLoopMode
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+
+    //    NSLog(@&quot;%@&quot;,[NSRunLoop currentRunLoop]);
+}
+
+- (void)run
+{
+    NSLog(@&quot;---run---%@&quot;,[NSRunLoop currentRunLoop].currentMode);
+}
+
+- (IBAction)btnClick {
+
+    NSLog(@&quot;---btnClick---&quot;);
+}
+面试:cell上有个定时器滑动cell定时器是否工作 这取决于定时器的mode
+</code></pre><p>(2)GCD中的定时器</p>
+<pre><code>    创建一个队列
+    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+
+//1.创建一个GCD的定时器
+/*
+ 第一个参数：说明这是一个定时器
+ 第四个参数：GCD的回调任务添加到那个队列中执行，如果是主队列则在主线程执行
+ */
+dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+
+//2.设置定时器的开始时间，间隔时间以及精准度
+
+//设置开始时间，三秒钟之后调用
+dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW,3.0 *NSEC_PER_SEC);
+//设置定时器工作的间隔时间
+uint64_t intevel = 1.0 * NSEC_PER_SEC;
+
+/*
+ 第一个参数：要给哪个定时器设置
+ 第二个参数：定时器的开始时间DISPATCH_TIME_NOW表示从当前开始
+ 第三个参数：定时器调用方法的间隔时间
+ 第四个参数：定时器的精准度，如果传0则表示采用最精准的方式计算，如果传大于0的数值，则表示该定时切换i可以接收该值范围内的误差，通常传0
+ 该参数的意义：可以适当的提高程序的性能
+ 注意点：GCD定时器中的时间以纳秒为单位（面试）
+ */
+
+dispatch_source_set_timer(timer, start, intevel, 0 * NSEC_PER_SEC);
+
+//3.设置定时器开启后回调的方法
+/*
+ 第一个参数：要给哪个定时器设置
+ 第二个参数：回调block
+ */
+dispatch_source_set_event_handler(timer, ^{
+    NSLog(@&quot;------%@&quot;,[NSThread currentThread]);
+});
+
+//4.执行定时器
+dispatch_resume(timer);
+
+//注意：dispatch_source_t本质上是OC类，在这里是个局部变量，需要强引用
+self.timer = timer;
+
+GCD定时器补充
+/*
+ DISPATCH_SOURCE_TYPE_TIMER         定时响应（定时器事件）
+ DISPATCH_SOURCE_TYPE_SIGNAL        接收到UNIX信号时响应
+
+ DISPATCH_SOURCE_TYPE_READ          IO操作，如对文件的操作、socket操作的读响应
+ DISPATCH_SOURCE_TYPE_WRITE         IO操作，如对文件的操作、socket操作的写响应
+ DISPATCH_SOURCE_TYPE_VNODE         文件状态监听，文件被删除、移动、重命名
+ DISPATCH_SOURCE_TYPE_PROC          进程监听,如进程的退出、创建一个或更多的子线程、进程收到UNIX信号
+
+ 下面两个都属于Mach相关事件响应
+    DISPATCH_SOURCE_TYPE_MACH_SEND
+    DISPATCH_SOURCE_TYPE_MACH_RECV
+ 下面两个都属于自定义的事件，并且也是有自己来触发
+    DISPATCH_SOURCE_TYPE_DATA_ADD
+    DISPATCH_SOURCE_TYPE_DATA_OR
+ */        
+</code></pre><p>CFRunloopSourceRef</p>
+<pre><code>1.是事件源也就是输入源，有两种分类模式；
+  一种是按照苹果官方文档进行划分的
+  另一种是基于函数的调用栈来进行划分的（source0(用户)和source1(系统)）。
+2.具体的分类情况
+（1）以前的分法
+    Port-Based Sources
+    Custom Input Sources
+    Cocoa Perform Selector Sources
+
+（2）现在的分法
+    Source0：非基于Port的
+    Source1：基于Port的
+</code></pre><p>  3.可以通过打断点的方式查看一个方法的函数调用栈<br>CFRunLoopObserverRef</p>
+<pre><code>（1）CFRunLoopObserverRef是观察者，能够监听RunLoop的状态改变
+
+（2）如何监听
+
+ //创建一个runloop监听者
+    CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(CFAllocatorGetDefault(),kCFRunLoopAllActivities, YES, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+
+    NSLog(@&quot;监听runloop状态改变---%zd&quot;,activity);
+});
+
+//为runloop添加一个监听者
+CFRunLoopAddObserver(CFRunLoopGetCurrent(), observer, kCFRunLoopDefaultMode);
+
+CFRelease(observer);
+</code></pre><p>（3）监听的状态</p>
+<pre><code>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+    kCFRunLoopEntry = (1UL &lt;&lt; 0),   //即将进入Runloop
+    kCFRunLoopBeforeTimers = (1UL &lt;&lt; 1),    //即将处理NSTimer
+    kCFRunLoopBeforeSources = (1UL &lt;&lt; 2),   //即将处理Sources
+    kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5),   //即将进入休眠
+    kCFRunLoopAfterWaiting = (1UL &lt;&lt; 6),    //刚从休眠中唤醒
+    kCFRunLoopExit = (1UL &lt;&lt; 7),            //即将退出runloop
+    kCFRunLoopAllActivities = 0x0FFFFFFFU   //所有状态改变
+};
+</code></pre><blockquote>
+<p>1.9 Runloop运行逻辑<br><img src="/Users/Lee/Desktop/5395047.png" alt=""><br><img src="/Users/Lee/Desktop/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png" alt=""></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/dachuizi/2017/05/10/极光推送/" rel="next" title="极光推送">
+                <i class="fa fa-chevron-left"></i> 极光推送
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/dachuizi/uploads/IMG_0375.JPG"
+               alt="Lee" />
+          <p class="site-author-name" itemprop="name">Lee</p>
+          <p class="site-description motion-element" itemprop="description">若无闲事挂心头,便是人间好时节</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/dachuizi/">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/dachuizi/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Runloop基础知识"><span class="nav-number">1.</span> <span class="nav-text">Runloop基础知识</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lee</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/dachuizi/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/dachuizi/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/dachuizi/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/dachuizi/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
