@@ -118,11 +118,11 @@ c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的
 1.3 重要说明
 
 1) 如果没有Runloop,那么程序已">
-<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png">
-<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/12941390.png">
-<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/5395047.png">
-<meta property="og:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png">
-<meta property="og:updated_time" content="2017-11-14T14:24:45.000Z">
+<meta property="og:image" content="https://github.com/TieChuiZhang/dachuizi/blob/master/img/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png?raw=true">
+<meta property="og:image" content="https://github.com/TieChuiZhang/dachuizi/blob/master/img/12941390.png?raw=true">
+<meta property="og:image" content="https://github.com/TieChuiZhang/dachuizi/blob/master/img/5395047.png?raw=true">
+<meta property="og:image" content="https://github.com/TieChuiZhang/dachuizi/blob/master/img/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png?raw=true">
+<meta property="og:updated_time" content="2017-11-14T15:22:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RunLoop">
 <meta name="twitter:description" content="Runloop基础知识
@@ -140,7 +140,7 @@ c 节约cpu资源,提高程序性能,有事情的时候做事情,没事情做的
 1.3 重要说明
 
 1) 如果没有Runloop,那么程序已">
-<meta name="twitter:image" content="https://tiechuizhang.github.io/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png">
+<meta name="twitter:image" content="https://github.com/TieChuiZhang/dachuizi/blob/master/img/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png?raw=true">
 
 
 
@@ -409,14 +409,14 @@ value对应该线程的Runloop
 </code></pre><blockquote>
 <p>1.8 Runloop相关类</p>
 </blockquote>
-<p>(1) Runloop运行原理图<br><img src="/Users/Lee/Desktop/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png" alt=""></p>
+<p>(1) Runloop运行原理图<br><img src="https://github.com/TieChuiZhang/dachuizi/blob/master/img/87F66E5F-6EA1-4A69-882B-6305C0BFD9C9.png?raw=true" alt=""></p>
 <p>(2) 五个相关的类</p>
 <pre><code>a.CFRunloopRef
 b.CFRunloopModeRef[Runloop的运行模式]
 c.CFRunloopSourceRef[Runloop要处理的事件源]
 d.CFRunloopTimerRef[Timer事件]
 e.CFRunloopObserverRef[Runloop的观察者]
-</code></pre><p>(3)    Runloop和相关类之间的关系图<br><img src="/Users/Lee/Desktop/12941390.png" alt="">    </p>
+</code></pre><p>(3)    Runloop和相关类之间的关系图<br><img src="https://github.com/TieChuiZhang/dachuizi/blob/master/img/12941390.png?raw=true" alt="">    </p>
 <p>(4)Runloop想要跑起来必须要有一个mode,这个mode必须有source/timer/observer 只要要有其中的一个</p>
 <pre><code>1.CFRunloopModeRef代表着Runloop的运行模式
 2.一个Runloop中可以有多个mode,一个mode中又可以有多个source/timer/observer
@@ -576,7 +576,7 @@ CFRelease(observer);
     kCFRunLoopAllActivities = 0x0FFFFFFFU   //所有状态改变
 };
 </code></pre><blockquote>
-<p>1.9 Runloop运行逻辑<br><img src="/Users/Lee/Desktop/5395047.png" alt=""><br><img src="/Users/Lee/Desktop/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png" alt=""></p>
+<p>1.9 Runloop运行逻辑<br><img src="https://github.com/TieChuiZhang/dachuizi/blob/master/img/5395047.png?raw=true" alt=""><br><img src="https://github.com/TieChuiZhang/dachuizi/blob/master/img/6c97d059-76f3-4093-9f61-9dc6f419ac8d.png?raw=true" alt=""></p>
 </blockquote>
 
       
