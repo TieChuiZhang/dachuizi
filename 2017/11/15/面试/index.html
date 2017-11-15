@@ -1,0 +1,814 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/dachuizi/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/dachuizi/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/dachuizi/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="“Lee,MiNi”" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/dachuizi/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.怎么显示你附近人的位置
+
+传自己经纬度到服务器,根据服务器返回的经纬度显示
+
+2随着你的移动如何来刷新附近人的位置
+
+获取屏幕中心点向服务器请求数据刷新附近大头针
+
+3.海量点的话5000个点是如何加载的怎么加载才能不卡顿
+
+第一次加载的时候显示少量点(聚合)
+当地图放大的时候加载更多的点或点击的时候加载更多的点
+
+真机调试大范围去调试
+
+每个账号只能一百台因为需要添加设备的UUID(企业账">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试">
+<meta property="og:url" content="https://tiechuizhang.github.io/2017/11/15/面试/index.html">
+<meta property="og:site_name" content="Lee">
+<meta property="og:description" content="1.怎么显示你附近人的位置
+
+传自己经纬度到服务器,根据服务器返回的经纬度显示
+
+2随着你的移动如何来刷新附近人的位置
+
+获取屏幕中心点向服务器请求数据刷新附近大头针
+
+3.海量点的话5000个点是如何加载的怎么加载才能不卡顿
+
+第一次加载的时候显示少量点(聚合)
+当地图放大的时候加载更多的点或点击的时候加载更多的点
+
+真机调试大范围去调试
+
+每个账号只能一百台因为需要添加设备的UUID(企业账">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/993906/201608/993906-20160827035328647-1394527569.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212709203-2004832279.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212641046-835448007.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212734484-351324840.png">
+<meta property="og:updated_time" content="2017-11-15T13:40:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试">
+<meta name="twitter:description" content="1.怎么显示你附近人的位置
+
+传自己经纬度到服务器,根据服务器返回的经纬度显示
+
+2随着你的移动如何来刷新附近人的位置
+
+获取屏幕中心点向服务器请求数据刷新附近大头针
+
+3.海量点的话5000个点是如何加载的怎么加载才能不卡顿
+
+第一次加载的时候显示少量点(聚合)
+当地图放大的时候加载更多的点或点击的时候加载更多的点
+
+真机调试大范围去调试
+
+每个账号只能一百台因为需要添加设备的UUID(企业账">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/993906/201608/993906-20160827035328647-1394527569.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/dachuizi/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiechuizhang.github.io/2017/11/15/面试/"/>
+
+
+
+
+
+  <title> 面试 | Lee </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/dachuizi/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lee</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/dachuizi/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/dachuizi/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://tiechuizhang.github.io/dachuizi/2017/11/15/面试/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Lee">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/dachuizi/uploads/IMG_0375.JPG">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lee">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Lee" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                面试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T09:53:31+08:00">
+                2017-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>1.怎么显示你附近人的位置</p>
+</blockquote>
+<pre><code>传自己经纬度到服务器,根据服务器返回的经纬度显示
+</code></pre><blockquote>
+<p>2随着你的移动如何来刷新附近人的位置</p>
+</blockquote>
+<pre><code>获取屏幕中心点向服务器请求数据刷新附近大头针
+</code></pre><blockquote>
+<p>3.海量点的话5000个点是如何加载的怎么加载才能不卡顿</p>
+</blockquote>
+<pre><code>第一次加载的时候显示少量点(聚合)
+当地图放大的时候加载更多的点或点击的时候加载更多的点
+</code></pre><blockquote>
+<p>真机调试大范围去调试</p>
+</blockquote>
+<pre><code>每个账号只能一百台因为需要添加设备的UUID(企业账号无限)
+越狱
+上传到蒲公英也只能100台(也需要添加uuid)
+</code></pre><blockquote>
+<p>地图行驶路径如何描绘(重点一直变化的情况下)    </p>
+</blockquote>
+<pre><code>请求回来的数据做存储后台有每一个点都有时间字段每每隔三秒请求一次
+然后对比存起来的点和最后一个点如果不相等就刷新
+</code></pre><blockquote>
+<p>手机端跟后端网络请求是通过什么实现的</p>
+</blockquote>
+<pre><code>AF(长连接)有待完善
+</code></pre><blockquote>
+<p>解释一下MVC框架,为什么要用他是什么一个运作机制</p>
+</blockquote>
+<ul>
+<li><p>MVC 的几个明显的特征和体现：</p>
+<pre><code>View 上面显示什么东西，取决于 Model。
+只要 Model 数据改了，View 的显示状态会跟着更改。
+Control 负责初始化 Model，并将 Model 传递给 View 去解
+析展示。
+</code></pre></li>
+</ul>
+<p>1）Modal 模型对象：</p>
+<pre><code>模型对象封装了应用程序的数据，并定义操控和处理该数据的逻辑和运
+算。例如，模型对象可能是表示商品数据 list。用户在视图层中所进
+行的创建或修改数据的操作，通过控制器对象传达出去，最终会创建或
+更新模型对象。模型对象更改时（例如通过网络连接接收到新数据），
+它通知控制器对象，控制器对象更新相应的视图对象。
+</code></pre><p>2）View 视图对象：</p>
+<pre><code>视图对象是应用程序中用户可以看见的对象。视图对象知道如何将自己
+绘制出来，可能对用户的操作作出响应。视图对象的主要目的就是显示
+来自应用程序模型对象的数据，并使该数据可被编辑。尽管如此，在 
+MVC 应用程序中，视图对象通常与模型对象分离。
+
+
+在iOS应用程序开发中，所有的控件、窗口等都继承自 UIView，对应
+ MVC 中的 V。UIView 及其子类主要负责 UI 的实现，而 UIView 
+ 所产生的事件都可以采用委托的方式，交给 UIViewController 实
+ 现。
+</code></pre><p>3）Controller 控制器对象：</p>
+<pre><code>在应用程序的一个或多个视图对象和一个或多个模型对象之间，控制器
+对象充当媒介。控制器对象因此是同步管道程序，通过它，视图对象了
+解模型对象的更改，反之亦然。控制器对象还可以为应用程序执行设置
+和协调任务，并管理其他对象的生命周期。
+
+
+控制器对象解释在视图对象中进行的用户操作，并将新的或更改过的数
+据传达给模型对象。模型对象更改时，一个控制器对象会将新的模型数
+据传达给视图对象，以便视图对象可以显示它。
+
+
+对于不同的 UIView，有相应的 UIViewController，对应 MVC 中
+的 C。例如在 iOS 上常用的 UITableView，它所对应的 
+Controller 就是UITableViewController。
+</code></pre><p>1.1 简单的 MVC</p>
+<pre><code>控制器加载模型数据并将数据转换为数据模型。
+控制器创建视图控件，并将模型数据传递给视图控件
+</code></pre><p><img src="http://images2015.cnblogs.com/blog/993906/201608/993906-20160827035328647-1394527569.png" alt=""></p>
+<p>1.2 iOS MVC 示意图</p>
+<p><img src="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212709203-2004832279.png" alt=""></p>
+<pre><code>1）Model 和 View 永远不能相互通信，只能通过 Controller 传
+递。
+
+2）Controller 可以直接与 Model 对话（读写调用 Model），
+Model 通过 Notification 和 KVO 机制与 Controller 间接通
+信。
+
+3）Controller 可以直接与 View 对话，通过 outlet，直接操作 
+View，outlet 直接对应到 View 中的控件，View 通过 action 
+向 Controller 报告事件的发生(如用户 Touch 我了)。
+Controller 是 View 的直接数据源（数据很可能是 Controller 
+从 Model 中取得并经过加工了）。Controller 是 View 的代理
+（delegate)，以同步 View 与 Controller。
+</code></pre><p>1.3 苹果推荐的 MVC – 愿景</p>
+<p><img src="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212641046-835448007.png" alt=""></p>
+<pre><code>Cocoa MVC
+
+由于 Controller 是一个介于 View 和 Model 之间的协调器，所
+以 View 和 Model 之间没有任何直接的联系。Controller 是一个
+最小可重用单元，这对我们来说是一个好消息，因为我们总要找一个地
+方来写逻辑复杂度较高的代码，而这些代码又不适合放在 Model 中。
+
+理论上来讲，这种模式看起来非常直观，但你有没有感到哪里有一丝诡
+异？你甚至听说过，有人将 MVC 的缩写展开成 (Massive View 
+Controller)，更有甚者，为 View controller 减负也成为 iOS
+ 开发者面临的一个重要话题。如果苹果继承并且对 MVC 模式有一些
+ 进展，所有这些为什么还会发生?
+</code></pre><p>1.4 苹果推荐的 MVC – 事实</p>
+<p><img src="http://images2015.cnblogs.com/blog/993906/201608/993906-20160814212734484-351324840.png" alt=""></p>
+<pre><code>Realistic Cocoa MVC
+
+Cocoa 的 MVC 模式驱使人们写出臃肿的视图控制器，因为它们
+经常被混杂到 View 的生命周期中，因此很难说 View 和 
+ViewController 是分离的。尽管仍可以将业务逻辑和数据转换
+到 Model，但是大多数情况下当需要为 View 减负的时候我们却
+无能为力了，View 的最大的任务就是向 Controller 传递用户
+动作事件。ViewController 不再承担一切代理和数据源的职
+责，通常只负责一些分发和取消网络请求以及一些其他的任务。
+
+你可能会看见过很多次这样的代码:
+
+    BookModel *bookModel = [myDataArray objectAtIndex:indexPath.row];
+    [cell configWithModel:bookModel];
+
+
+这个 cell，正是由 View 直接来调用 Model，所以事实上
+ MVC 的原则已经违背了，但是这种情况是一直发生的甚至于人们
+ 不觉得这里有哪些不对。如果严格遵守 MVC 的话,你会把对
+  cell 的设置放在 Controller 中，不向 View 传递一个 
+  Model 对象，这样就会大大减少 Controller 的体积。
+  Cocoa 的 MVC 被写成 Massive View Controller 是不无道理的。
+直到进行单元测试的时候才会发现问题越来越明显。因为你的
+ ViewController 和 View 是紧密耦合的，对它们进行测试就
+ 显得很艰难--你得有足够的创造性来模拟 View 和它们的生命周
+ 期,在以这样的方式来写 View Controller 的同时，业务逻辑
+ 的代码也逐渐被分散到 View 的布局代码中去。
+</code></pre><p>1.5 MVC 自身的不足</p>
+<pre><code>MVC 是一个用来组织代码的权威范式，也是构建 iOS App 的标
+准模式。Apple 甚至是这么说的。在 MVC 下，所有的对象被归
+类为一个
+ model，一个 view，或一个 controller。Model 持有数
+ 据，View 显示与用户交互的界面，而 View Controller 调
+ 解 Model 和 View 之间的交互。然而，随着模块的迭代我们越
+ 来越发现 MVC 自身存在着很多不足。
+</code></pre><p>1）MVC 在现实应用中的不足：</p>
+<pre><code>在 MVC 模式中 view 将用户交互通知给控制器。
+view 的控制器通过更新 Model 来反应状态的改变。
+Model（通常使用 Key-Value-Observation）通知控制器来更
+新他们负责的 view。
+大多数 iOS 应用程序的代码使用这种方式来组织。
+</code></pre><p>2）愈发笨重的 Controller：</p>
+<pre><code>厚重的 View Controller 由于大量的代码被放进 
+viewcontroller，导致他们变的相当臃肿。
+在 iOS 中有的 view controller 里绵延成千上万行代码的事
+并不是前所未见的。
+这些超重 app 的突出情况包括：
+1.厚重的 View Controller 很难维护（由于其庞大的规模)；
+ 2.包含几十个属性，使他们的状态难以管理；
+3.遵循许多协议（protocol），导致协议的响应代码和 
+controller 的逻辑代码混淆在一起。
+
+厚重的 view controller 很难测试，不管是手动测试或是使用
+
+单元测试，因为有太多可能的状态。将代码分解成更小的多个模块通常是件好事。
+</code></pre><p>3）太过于轻量级的 Model：</p>
+<pre><code>早期的 Model 层，其实就是如果数据有几个属性，就定义几个属
+性，ARC 普及以后我们在 Model 层的实现文件中基本上看不到
+代码（无需再手动管理释放变量，Model 既没有复杂的业务处
+理，也没有对象的构造，基本上 .m 文件中的代码普遍是空的）；
+同时与控制器的代码越来厚重形成强烈的反差，这一度让人不禁对
+现有的开发设计构思有所怀疑。
+</code></pre><p>4）遗失的网络逻辑：</p>
+<pre><code>苹果使用的 MVC 的定义是这么说的：所有的对象都可以被归类为
+一个 Model，一个 view，或是一个控制器。就这些，那么把网
+络代码放哪里？和一个 API 通信的代码应该放在哪儿？
+
+你可能试着把它放在 Model 对象里，但是也会很棘手，因为网络
+调用应该使用异步，这样如果一个网络请求比持有它的 Model 生
+命周期更长，事情将变的复杂。显然也不应该把网络代码放在 
+view 里，因此只剩下控制器了。这同样是个坏主意，因为这加剧
+了厚重控制器的问题。那么应该放在那里呢？显然 MVC 的 3 大
+组件根本没有适合放这些代码的地方。
+</code></pre><p>5）较差的可测试性</p>
+<pre><code>MVC 的另一个大问题是，它不鼓励开发人员编写单元测试。由于控
+制器混合了视图处理逻辑和业务逻辑，分离这些成分的单元测试成
+了一个艰巨的任务。大多数人选择忽略这个任务，那就是不做任何
+测试。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/dachuizi/2017/11/14/RunLoop/" rel="next" title="RunLoop">
+                <i class="fa fa-chevron-left"></i> RunLoop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/dachuizi/2017/11/15/iOS工程师技能表/" rel="prev" title="iOS工程师技能表">
+                iOS工程师技能表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/dachuizi/uploads/IMG_0375.JPG"
+               alt="Lee" />
+          <p class="site-author-name" itemprop="name">Lee</p>
+          <p class="site-description motion-element" itemprop="description">若无闲事挂心头,便是人间好时节</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/dachuizi/">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/dachuizi/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lee</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dachuizi/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/dachuizi/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/dachuizi/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/dachuizi/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/dachuizi/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/dachuizi/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
